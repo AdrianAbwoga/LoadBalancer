@@ -26,7 +26,7 @@ The purpose of this project is to:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/loadbalancer-performance-analysis.git
+   git clone https://github.com/AdrianAbwoga/loadbalancer.git
    cd loadbalancer-performance-analysis
    ```
 
