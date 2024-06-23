@@ -1,7 +1,3 @@
-Here's a comprehensive README file that covers the requirements of your project:
-
----
-
 # Load Balancer Performance Analysis
 
 ## Overview
