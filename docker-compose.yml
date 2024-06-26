@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  load_balancer:
+    build:
+      context: .
+      dockerfile: LoadBalancerDockerfile
+    ports:
+      - "5000:5000"  # Expose port 5000 on the host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Mount Docker socket
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: .
+      dockerfile: ServerDockerfile
+    environment:
+      - SERVER_ID=1
+    expose:
+      - "5000"  # Expose port 5000 to linked services
+    deploy:
+      replicas: 3
