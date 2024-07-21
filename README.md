@@ -50,7 +50,7 @@ The purpose of this project is to:
 1. **Launch 10,000 Async Requests on N=3 Server Containers**
 
    ```bash
-   ab -n 10000 -c 100 http://localhost:5000/home > ab_output.txt
+   python3 test1.py
    ```
 
 2. **Parse ApacheBench Output and Visualize**
