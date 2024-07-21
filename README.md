@@ -66,7 +66,7 @@ The purpose of this project is to:
 1. **Run the Benchmark**
 
    ```bash
-   ab -n 10000 -c 100 http://localhost:5000/home > ab_output.txt
+   python3 test1.py
    ```
 
 2. **Visualize the Data**
@@ -77,23 +77,14 @@ The purpose of this project is to:
 
 1. **Increment Server Instances**
 
-   Modify the `docker-compose.yml` file to change the number of server instances.
-
-   ```yaml
-   deploy:
-     replicas: N
+  make changes as required by adding servers on by one using the /add end point and run the test1.py for traffic requests to run through followed by the parse_ab.py to visualise.
+  
+```bash
+   curl -X POST -H "Content-Type: application/json" -d '{"hostnames": ["http://localhost:500X"]}' http://localhost:5000/add
+   python3 test1.py
    ```
 
-   Increment `N` from 2 to 6 and run the benchmarks.
-
-2. **Run the Benchmark for Each Configuration**
-
-   ```bash
-   docker-compose up --scale server=N
-   ab -n 10000 -c 100 http://localhost:5000/home > ab_output_N.txt
-   ```
-
-3. **Collect and Visualize Data**
+2. **Collect and Visualize Data**
 
    Parse the output files and create a line chart to show the average load (Requests per second) vs. number of server instances.
 
