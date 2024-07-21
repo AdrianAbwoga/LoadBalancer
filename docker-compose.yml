@@ -1,24 +1,99 @@
-version: '3.8'
-
+version: "3.9"
 services:
   load_balancer:
-    build:
-      context: .
-      dockerfile: LoadBalancerDockerfile
+    build: ./load_balancer
     ports:
-      - "5000:5000"  # Expose port 5000 on the host
+      - "5000:5000"
+    networks:
+      - internal_network
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock  # Mount Docker socket
-    depends_on:
-      - server
+      - ./logs:/logs
+    privileged: true
 
-  server:
+  server1:
     build:
-      context: .
-      dockerfile: ServerDockerfile
+      context: ./server
+      args:
+        SERVER_ID: Server_1
     environment:
-      - SERVER_ID=1
-    expose:
-      - "5000"  # Expose port 5000 to linked services
-    deploy:
-      replicas: 3
+      - SERVER_ID=Server_1
+    networks:
+      - internal_network
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./logs:/logs
+
+  server2:
+    build:
+      context: ./server
+      args:
+        SERVER_ID: Server_2
+    environment:
+      - SERVER_ID=Server_2
+    networks:
+      - internal_network
+    ports:
+      - "5002:5000"
+    volumes:
+      - ./logs:/logs
+
+  server3:
+    build:
+      context: ./server
+      args:
+        SERVER_ID: Server_3
+    environment:
+      - SERVER_ID=Server_3
+    networks:
+      - internal_network
+    ports:
+      - "5003:5000"
+    volumes:
+      - ./logs:/logs
+
+  server4:
+    build:
+      context: ./server
+      args:
+        SERVER_ID: Server_4
+    environment:
+      - SERVER_ID=Server_4
+    networks:
+      - internal_network
+    ports:
+      - "5004:5000"
+    volumes:
+      - ./logs:/logs
+
+  server5:
+    build:
+      context: ./server
+      args:
+        SERVER_ID: Server_5
+    environment:
+      - SERVER_ID=Server_5
+    networks:
+      - internal_network
+    ports:
+      - "5005:5000"
+    volumes:
+      - ./logs:/logs
+
+  server6:
+    build:
+      context: ./server
+      args:
+        SERVER_ID: Server_6
+    environment:
+      - SERVER_ID=Server_6
+    networks:
+      - internal_network
+    ports:
+      - "5006:5000"
+    volumes:
+      - ./logs:/logs
+
+networks:
+  internal_network:
+    driver: bridge
